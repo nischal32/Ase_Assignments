@@ -5,14 +5,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ase_Assignments
+namespace assignment
 {
     class Rectangle : Shape// rectangle class implements shape interface
     {
-        public void drawShape(string[] res, Graphics g, int k, int l)
+        int a = 0, b = 0;
+        public void drawShape(string[] res, Graphics g, int k, int l, int radius, int width, int height)
         {
-            int a = Convert.ToInt32(res[1]);
-            int b = Convert.ToInt32(res[2]);
+            if (width != 0 && height != 0)
+            {
+                a = width;
+                b = height;
+            }
+            else
+            {
+                try
+                {
+                    a = Convert.ToInt32(res[1]);
+                    b = Convert.ToInt32(res[2]);
+                }
+                catch (Exception e)
+                {
+
+                }
+
+            }
             Pen p = new Pen(Color.Bisque, 3);
             g.DrawRectangle(p, k, l, a, b);
         }

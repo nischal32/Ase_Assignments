@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ase_Assignments
+namespace assignment
 {
     class Factory
     {
@@ -21,6 +21,10 @@ namespace Ase_Assignments
             else if (k == "circle")
             {
                 return new Circle();
+            }
+            else if (k == "square")
+            {
+                return new Square();
             }
             return null;
         }

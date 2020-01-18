@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ase_Assignments
+namespace assignment
 {
     interface Shape
     {
-        void drawShape(string[] res, Graphics g, int k, int l);
+        void drawShape(string[] res, Graphics g, int k, int l, int radius, int width, int height);
     }
 }

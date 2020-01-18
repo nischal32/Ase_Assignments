@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using assignment;
+using System;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Ase_Assignments
@@ -58,45 +53,7 @@ namespace Ase_Assignments
                 {
                     ValidateCode v = new ValidateCode();
                     String[] result = v.valid(arrayOrder[i]);
-                    try
-                    {
-                        if (result[0] == "moveTo")
-                        {
-                            int a = Convert.ToInt32(result[1]);
-                            int b = Convert.ToInt32(result[2]);
-                            x = a;
-                            y = b;
-                        }
-                        else if (result[0] == "drawTo")
-                        {
-                            int a = Convert.ToInt32(result[1]);
-                            int b = Convert.ToInt32(result[2]);
-                            Pen pen = new Pen(Color.Bisque, 3);
-                            graphics.DrawLine(pen, x, y, a, b);
-                        }
-                        else if (result[0] == "rectangle")
-                        {
-                            Factory s1 = new Factory();
-                            Shape sh = s1.getShape(result[0]);
-                            sh.drawShape(result, graphics, x, y);
-                        }
-                        else if (result[0] == "triangle")
-                        {
-                            Factory t1 = new Factory();
-                            Shape sh = t1.getShape(result[0]);
-                            sh.drawShape(result, graphics, x, y);
-                        }
-                        else if (result[0] == "circle")
-                        {
-                            Factory c1 = new Factory();
-                            Shape sh = c1.getShape(result[0]);
-                            sh.drawShape(result, graphics, x, y);
-                        }
-                    }
-                    catch (IndexOutOfRangeException n)          //catches exception whendex is out of array
-                    {
-                        MessageBox.Show("Invalid Command");
-                    }
+                    getShape(result);
                 }
             }
             else
@@ -224,7 +181,15 @@ namespace Ase_Assignments
                 {
                     height = Convert.ToInt32(result[2]);
                 }
-                
+                else if (result[0] == "square")
+                {
+                    square(result);
+                }
+                else if(result[0] == "transform")
+                {
+                    transform(result);
+                }
+
             }
             catch (IndexOutOfRangeException j)//catches array ouut of range exceptions
             {
@@ -251,7 +216,75 @@ namespace Ase_Assignments
             d = 0;
             radius = radius + Convert.ToInt32(result[2]);
         }
+        /// <summary>
+        /// Method for triangle
+        /// </summary>
+        /// <param name="result"></param>
+        private void triangle(string[] result)
+        {
+            d = 0;
+            Factory t1 = new Factory();
+            Shape sh = t1.getShape(result[0]);
+            sh.drawShape(result, graphics, x, y, radius, width, height);
+        }
+        /// <summary>
+        /// Method  for square
+        /// </summary>
+        /// <param name="result"></param>
+        private void square(string[] result)
+        {
+            d = 0;
+            Factory c1 = new Factory();
+            Shape sh = c1.getShape(result[0]);
+            sh.drawShape(result, graphics, x, y, radius, width, height);
+        }
+        /// <summary>
+        /// Method for drawto upto certain points
+        /// </summary>
+        /// <param name="result"></param>
+        private void drawto(string[] result)
+        {
+            if (result[1].Equals("a") && result[2].Equals("b"))
+            {
+                a = 0;
+                b = 50;
+            }
+            else
+            {
+                a = Convert.ToInt32(result[1]);
+                b = Convert.ToInt32(result[2]);
+            }
+            Pen pen = new Pen(Color.Bisque, 3);
+            graphics.DrawLine(pen, x, y, a, b);
+        }
+        /// <summary>
+        /// Method to transform points upto certain  points
+        /// </summary>
+        /// <param name="result"></param>
+        private void transform(string[] result)
+        {
+            d = 0;
+            if (result[1].Equals("xpoint") && result[2].Equals("ypoint"))
+            {
+                xTranslate = 30;
+                yTranslate = 40;
+            }
+            else
+            {
+                xTranslate = Convert.ToInt32(result[1]);
+                yTranslate = Convert.ToInt32(result[2]);
+            }
+            graphics.TranslateTransform(x, y);
+            MessageBox.Show("points has been transformed to \r\nx:" + xTranslate + "\r\ny:" + yTranslate + "");//shows message box
 
+        }
+        private void rectangle(string[] result)
+        {
+            d = 0;
+            Factory s1 = new Factory();
+            Shape sh = s1.getShape(result[0]);
+            sh.drawShape(result, graphics, x, y, radius, width, height);
+        }
 
     }
 }
