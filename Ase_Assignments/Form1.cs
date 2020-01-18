@@ -12,6 +12,7 @@ using System.Windows.Forms;
 
 namespace Ase_Assignments
 {
+    //Initializing variables
     public partial class Form1 : Form
     {
         int x = 0, y = 0;
@@ -26,6 +27,9 @@ namespace Ase_Assignments
         {
 
         }
+        /// <summary>
+        /// sets panel background color to light blue
+        /// </summary>
 
         private void panel_Paint(object sender, PaintEventArgs e)
         {
@@ -37,7 +41,9 @@ namespace Ase_Assignments
         {
 
         }
-
+        /// <summary> 
+        ///this code check commannd line by line and executes them 
+        /// </summary>
         private void Execute_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(textarea.Text))
@@ -102,13 +108,18 @@ namespace Ase_Assignments
             command.ResetText();
             MessageBox.Show("Text has been cleared");
         }
-
+        /// <summary>
+        /// clears the panel by refreshing the panel
+        /// </summary>
         private void clear_Click(object sender, EventArgs e)
         {
             panel.Refresh();
             MessageBox.Show("Drawing has been cleared");
         }
-
+         /// <summary>
+        /// resets the position of the cursor
+        /// displays message 'points has been reseted' in the message box
+        /// </summary>
         private void reset_Click(object sender, EventArgs e)
         {
             x = 0;
@@ -150,7 +161,9 @@ namespace Ase_Assignments
 
             }
         }
-
+        /// <summary>
+        /// Open,read and display the text file selected by user on clicking load menu item
+        /// </summary>
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog load = new OpenFileDialog();
@@ -164,7 +177,9 @@ namespace Ase_Assignments
                 openStream.Dispose();
             }
         }
-
+        /// <summary>
+        /// .Saves or overWrites  the text file loaded by the user on cliking save menu item. 
+        /// </summary>
         private void laveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog save = new SaveFileDialog();
@@ -179,12 +194,19 @@ namespace Ase_Assignments
                 saveStream.Dispose();
             }
         }
-
+        /// <summary>
+        /// Closes the application
+        /// </summary>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
 
         }
+        /// <summary>
+        /// this code is used reads text from textbox and validates them by sending the data through valid method in ValidateCode class
+        /// once validated return value is checked for command if found code is executed 
+        /// if command is not found catch block is executed
+        /// </summary>
 
         private void run_Click(object sender, EventArgs e)
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ase_Assignments
 {
-    class Circle : Shape
+    class Circle : Shape//circle class implements shape interface
     {
         public void drawShape(string[] res, Graphics g, int k, int l)
         {
