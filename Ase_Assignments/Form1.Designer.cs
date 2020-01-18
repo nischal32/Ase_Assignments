@@ -78,19 +78,19 @@
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "Load";
             // 
             // laveToolStripMenuItem
             // 
             this.laveToolStripMenuItem.Name = "laveToolStripMenuItem";
-            this.laveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.laveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.laveToolStripMenuItem.Text = "Save";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // panel
@@ -99,6 +99,7 @@
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(302, 287);
             this.panel.TabIndex = 2;
+            this.panel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Paint);
             // 
             // clear
             // 
