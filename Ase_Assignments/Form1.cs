@@ -182,29 +182,57 @@ namespace Ase_Assignments
                 {
                     height = Convert.ToInt32(result[2]);
                 }
-                else if (result[0] == "square")
+                else if (result[0] == "loop")
                 {
-                    square(result);
+                    loop(result, radius, width, height);
                 }
-                else if(result[0] == "transform")
+                else if (d == 0)
                 {
-                    transform(result);
-                }
-                else if (result[0] == "if")
-                {
-                    ifcase(result);
-                }
-                else if (result[0] == "mycircle")
-                {
-                    myCircle(result);
-                }
-                else if (result[0] == "myrectangle")
-                {
-                    myRectangle(result);
-                }
-                else if (result[0] == "method")
-                {
-                    definmethod(result);
+                    // END LOOPING STATEMENT
+                    if (result[0] == "rectangle")
+                    {
+                        rectangle(result);
+                    }
+                    else if (result[0] == "triangle")
+                    {
+                        triangle(result);
+                    }
+                    else if (result[0] == "circle")
+                    {
+                        circle(result);
+                    }
+                    else if (result[0] == "square")
+                    {
+                        square(result);
+                    }
+                    else if (result[0] == "moveTo")
+                    {
+                        moveTo(result);
+                    }
+                    else if (result[0] == "drawTo")
+                    {
+                        drawto(result);
+                    }
+                    else if (result[0] == "transform")
+                    {
+                        transform(result);
+                    }
+                    else if (result[0] == "method")
+                    {
+                        definmethod(result);
+                    }
+                    else if (result[0] == "if")
+                    {
+                        ifcase(result);
+                    }
+                    else if (result[0] == "mycircle")
+                    {
+                        myCircle(result);
+                    }
+                    else if (result[0] == "myrectangle")
+                    {
+                        myRectangle(result);
+                    }
                 }
 
             }
@@ -215,7 +243,6 @@ namespace Ase_Assignments
 
             }
         }
-
 
         /// <summary>
         /// if case method
@@ -289,6 +316,104 @@ namespace Ase_Assignments
             return 0;
 
         }
+        /// <summary>
+        /// declaring and calling all the methods to be used in looping proccess  
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="radius"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+
+        private void loop(string[] result, int radius, int width, int height)
+        {
+            int b = Ending();
+            d = 1;
+            if (b == 5)
+            {
+                string[] line;
+                int a = Convert.ToInt32(result[1]);
+                line = textarea.Lines;
+                ValidateCode val = new ValidateCode();
+                var textArr = textOrder.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                int length = textArr.Length;
+                for (int s = 1; s <= a; s++)
+                {
+                    int temp = linenumber();
+                    int number = linenumber();
+                    int counter = 0;
+                    for (int t = 1; t < length - 1; t++)
+                    {
+                        string[] arrayOrder = Regex.Split(line[temp], "\r\n");//splits the data at next line and stores themin array
+                                                                              //MessageBox.Show(arrayOrder[0]);
+                        String[] results = val.valid(arrayOrder[0]);
+                        if (results[0] == "rectangle")
+                        {
+                            rectangle(results);
+                        }
+                        else if (results[0] == "triangle")
+                        {
+                            triangle(results);
+                        }
+                        else if (results[0] == "circle")
+                        {
+                            circle(results);
+                        }
+                        else if (results[0] == "square")
+                        {
+                            square(results);
+                        }
+                        else if (results[0] == "transform")
+                        {
+                            transform(results);
+                        }
+                        else if (results[0] == "drawTo")
+                        {
+                            drawto(results);
+                        }
+                        else if (results[0] == "moveto")
+                        {
+                            moveTo(results);
+                        }
+                        else if (results[0] == "radius" && results[1] == "=")
+                        {
+                            string[] r = { "circle", results[1], results[2] };
+                            radiusE(r);
+
+                        }
+                        else if (results[0] == "width" && results[1] == "=")
+                        {
+                            width = Convert.ToInt32(result[2]);
+                        }
+                        else if (results[0] == "height" && results[1] == "=")
+                        {
+                            height = Convert.ToInt32(results[2]);
+                        }
+                        else if (results[0] == "radius" && results[1] == "+")
+                        {
+                            string[] r = { "circle", results[1], results[2] };
+                            radiusP(r);
+                        }
+                        else if (results[0] == "width" && results[1] == "+")
+                        {
+                            width = Convert.ToInt32(results[2]);
+                        }
+                        else if (results[0] == "height" && results[1] == "+")
+                        {
+                            height = Convert.ToInt32(results[2]);
+                        }
+
+                        counter = counter + 1;
+                        temp = temp + 1;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("end command missing");
+                d = 1;
+            }
+        }
+
         /// <summary>
         /// used to check symbols and check is condition is true or false for the if case method
         /// </summary>
@@ -633,6 +758,27 @@ namespace Ase_Assignments
             Shape sh = s1.getShape(result[0]);
             sh.drawShape(result, graphics, x, y, radius, width, height);
         }
-
+        /// <summary>
+        /// Method for moveto method
+        /// </summary>
+        /// <param name="result"></param>
+        private void moveTo(String[] result)
+        {
+            if (result[1].Equals("a") && result[2].Equals("b"))
+            {
+                fVal = 50;
+                sVal = 100;
+            }
+            else
+            {
+                fVal = Convert.ToInt32(result[1]);
+                sVal = Convert.ToInt32(result[2]);
+            }
+            x = fVal;
+            y = sVal;
+            MessageBox.Show("points has been moved to \r\nx:" + x + "\r\ny:" + y + "");//shows message box
+        }
     }
+
+
 }
