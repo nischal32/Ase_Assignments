@@ -16,5 +16,15 @@ namespace Ase_Assignments
         {
             InitializeComponent();
         }
+
+        private void command_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void run_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
