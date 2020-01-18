@@ -194,6 +194,18 @@ namespace Ase_Assignments
                 {
                     ifcase(result);
                 }
+                else if (result[0] == "mycircle")
+                {
+                    myCircle(result);
+                }
+                else if (result[0] == "myrectangle")
+                {
+                    myRectangle(result);
+                }
+                else if (result[0] == "method")
+                {
+                    definmethod(result);
+                }
 
             }
             catch (IndexOutOfRangeException j)//catches array ouut of range exceptions
@@ -335,6 +347,7 @@ namespace Ase_Assignments
                 }
 
             }
+
             //condition to check if radius is lesser
             else if (results[2] == "<")
             {
@@ -359,6 +372,164 @@ namespace Ase_Assignments
                         d = 1;
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Method for defining a a method with
+        /// </summary>
+        /// <param name="result"></param>
+        private void definmethod(string[] result)
+        {
+            d = 1;
+            int b = Ending();
+            if (b == 6)
+            {
+                string[] line;
+                line = textarea.Lines;
+                ValidateCode val = new ValidateCode();
+                var textArr = textOrder.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                int length = textArr.Length;
+                int counter = 0;
+                int temp = linenumber();
+                for (int t = 1; t < length - 1; t++)
+                {
+                    string[] arrayOrder = Regex.Split(line[temp], "\r\n");//splits the data at next line and stores themin array
+                    String[] results = val.valid(arrayOrder[0]);
+                    if (results[0] == "circle" || results[0] == "rectangle")
+                    {
+                        string[] arrayOrders = Regex.Split(line[temp], "\r\n");//splits the data at next line and stores themin array
+                        results = val.valid(arrayOrder[0]);
+                        if (results[0] == "rectangle" && result[0] == "rectangle")
+                        {
+                            string[] arra = { "rectangle", result[1], result[2] };
+                            rectangle(arra);
+                            MessageBox.Show("Rectangle Build");
+                        }
+                        else if (results[0] == "circle" && result[0] == "circle")
+                        {
+                            string[] arra = { "circle", result[1] };
+                            circle(arra);
+                            MessageBox.Show("circle build");
+                        }
+                    }
+                    counter = counter + 1;
+                }
+            }
+            else
+            {
+                d = 1;
+                MessageBox.Show("endmethod missing");
+            }
+
+        }
+        /// <summary>
+        /// used to find the line for loop and if in command textbox
+        /// </summary>
+        /// <returns></returns>
+
+        private int linenumber()
+        {
+            string[] line;
+            line = textarea.Lines;
+            ValidateCode val = new ValidateCode();
+            var textArr = textOrder.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            int len = textArr.Length;
+            int counter = 0;
+            int l = 1;
+            for (int t = 0; t <= len; t++)
+            {
+                string[] arrayOrder = Regex.Split(line[counter], "\r\n");//splits the data at next line and stores themin array
+
+                string[] result1 = val.valid(arrayOrder[0]);
+                if (result1[0] == "loop")
+                {
+                    return counter;
+                    break;
+
+                }
+                else if (result1[0] == "if")
+                {
+                    return counter;
+                    break;
+                }
+                else if (result1[0] == "circle" || result1[0] == "rectangle")
+                {
+                    return counter;
+                    break;
+                }
+
+                counter = counter + 1;
+                l = l + 1;
+            }
+            return 0;
+        }
+        /// <summary>
+        /// Method to define rectangle call method with
+        /// </summary>
+        /// <param name="result"></param>
+        private void myRectangle(string[] result)
+        {
+            string[] a;
+            string[] line;
+            line = textarea.Lines;
+            ValidateCode val = new ValidateCode();
+            var textArr = textOrder.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            int length = textArr.Length;
+            int counter = 0;
+            for (int t = 1; t <= length; t++)
+            {
+                string[] arrayOrders = Regex.Split(line[counter], "\r\n");//splits the data at next line and stores themin array                        
+                String[] res = val.valid(arrayOrders[0]);
+                if (res[0] == "myrectangle")
+                {
+                    string[] arra = Regex.Split(line[counter + 1], "\r\n");//splits the data at next line and stores themin array
+                    a = val.valid(arra[0]);
+                    if (a[1] == "myrectangle")
+                    {
+                        string[] re = { "rectangle", res[1], res[2] };
+                        definmethod(re);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Method doesnot match"); ;
+                    }
+                }
+                counter = counter + 1;
+            }
+        }
+        /// <summary>
+        /// Method to call circle method with
+        /// </summary>
+        /// <param name="result"></param>
+        private void myCircle(string[] result)
+        {
+            string[] a;
+            string[] line;
+            line = textarea.Lines;
+            ValidateCode val = new ValidateCode();
+            var textArr = textOrder.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            int length = textArr.Length;
+            int counter = 0;
+            for (int t = 1; t <= length; t++)
+            {
+                string[] arrayOrders = Regex.Split(line[counter], "\r\n");//splits the data at next line and stores themin array                                                                 //MessageBox.Show(arrayOrder[0]);
+                String[] res = val.valid(arrayOrders[0]);
+                if (res[0] == "mycircle")
+                {
+                    string[] arra = Regex.Split(line[counter + 1], "\r\n");//splits the data at next line and stores themin array
+                    a = val.valid(arra[0]);
+                    if (a[1] == "mycircle")
+                    {
+                        string[] re = { "circle", res[1] };
+                        definmethod(re);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Method doesnot match"); ;
+                    }
+                }
+                counter = counter + 1;
             }
         }
 
