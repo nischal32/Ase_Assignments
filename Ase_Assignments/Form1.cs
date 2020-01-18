@@ -96,6 +96,31 @@ namespace Ase_Assignments
             }
         }
 
+        private void textClear_Click(object sender, EventArgs e)
+        {
+            command.ResetText();
+            MessageBox.Show("Text has been cleared");
+        }
+
+        private void clear_Click(object sender, EventArgs e)
+        {
+            panel.Refresh();
+            MessageBox.Show("Drawing has been cleared");
+        }
+
+        private void reset_Click(object sender, EventArgs e)
+        {
+            x = 0;
+            y = 0;
+            MessageBox.Show("Points has been reseted to \r\nX:0\r\nY:0");
+        }
+
+        private void refresh_Click(object sender, EventArgs e)
+        {
+            textarea.ResetText();
+            MessageBox.Show("Text has been cleared");
+        }
+
         private void run_Click(object sender, EventArgs e)
         {
             String cmd = command.Text;

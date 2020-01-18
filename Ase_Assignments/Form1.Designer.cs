@@ -110,6 +110,7 @@
             this.clear.TabIndex = 3;
             this.clear.Text = "Clear";
             this.clear.UseVisualStyleBackColor = true;
+            this.clear.Click += new System.EventHandler(this.clear_Click);
             // 
             // reset
             // 
@@ -119,6 +120,7 @@
             this.reset.TabIndex = 4;
             this.reset.Text = "Reset";
             this.reset.UseVisualStyleBackColor = true;
+            this.reset.Click += new System.EventHandler(this.reset_Click);
             // 
             // command
             // 
@@ -146,6 +148,7 @@
             this.textClear.TabIndex = 7;
             this.textClear.Text = "Clear";
             this.textClear.UseVisualStyleBackColor = true;
+            this.textClear.Click += new System.EventHandler(this.textClear_Click);
             // 
             // Execute
             // 
@@ -164,6 +167,7 @@
             this.refresh.TabIndex = 8;
             this.refresh.Text = "clear";
             this.refresh.UseVisualStyleBackColor = true;
+            this.refresh.Click += new System.EventHandler(this.refresh_Click);
             // 
             // load
             // 
