@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -119,6 +120,70 @@ namespace Ase_Assignments
         {
             textarea.ResetText();
             MessageBox.Show("Text has been cleared");
+        }
+
+        private void load_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog load = new OpenFileDialog();
+            load.Title = "Load.";
+            load.Filter = "Text Files(*.txt)|*.txt| All Files(*.*)|*.*";
+
+            if (load.ShowDialog() == DialogResult.OK)
+            {
+                StreamReader openStream = new StreamReader(File.OpenRead(load.FileName));
+                textarea.Text = openStream.ReadToEnd();
+                openStream.Dispose();
+            }
+        }
+
+        private void save_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            save.Title = "Save";
+            save.Filter = "Text Files(*.txt)|*.txt| All Files(*.*)|*.*";
+
+            if (save.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                StreamWriter saveStream = new StreamWriter(File.Create(save.FileName));
+                saveStream.Write(textarea.Text);
+                saveStream.Dispose();
+
+            }
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog load = new OpenFileDialog();
+            load.Title = "Load.";
+            load.Filter = "Text Files(*.txt)|*.txt| All Files(*.*)|*.*";
+
+            if (load.ShowDialog() == DialogResult.OK)
+            {
+                StreamReader openStream = new StreamReader(File.OpenRead(load.FileName));
+                textarea.Text = openStream.ReadToEnd();
+                openStream.Dispose();
+            }
+        }
+
+        private void laveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            save.Title = "Save";
+            save.Filter = "Text Files(*.txt)|*.txt| All Files(*.*)|*.*";
+
+            if (save.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                StreamWriter saveStream = new StreamWriter(File.Create(save.FileName));
+                saveStream.Write(textarea.Text);
+
+                saveStream.Dispose();
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+
         }
 
         private void run_Click(object sender, EventArgs e)
