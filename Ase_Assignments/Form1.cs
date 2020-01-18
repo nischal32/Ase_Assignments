@@ -15,8 +15,10 @@ namespace Ase_Assignments
     //Initializing variables
     public partial class Form1 : Form
     {
-        int x = 0, y = 0;
+        int x = 0, y = 0, radius = 0, width = 0, height = 0, d = 0;
         Graphics graphics;
+        int fVal = 0, sVal = 0;
+        int a = 0, b = 0, xTranslate = 0, yTranslate = 0;
         public Form1()
         {
             InitializeComponent();
@@ -116,7 +118,7 @@ namespace Ase_Assignments
             panel.Refresh();
             MessageBox.Show("Drawing has been cleared");
         }
-         /// <summary>
+        /// <summary>
         /// resets the position of the cursor
         /// displays message 'points has been reseted' in the message box
         /// </summary>
@@ -133,34 +135,8 @@ namespace Ase_Assignments
             MessageBox.Show("Text has been cleared");
         }
 
-        private void load_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog load = new OpenFileDialog();
-            load.Title = "Load.";
-            load.Filter = "Text Files(*.txt)|*.txt| All Files(*.*)|*.*";
 
-            if (load.ShowDialog() == DialogResult.OK)
-            {
-                StreamReader openStream = new StreamReader(File.OpenRead(load.FileName));
-                textarea.Text = openStream.ReadToEnd();
-                openStream.Dispose();
-            }
-        }
 
-        private void save_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog save = new SaveFileDialog();
-            save.Title = "Save";
-            save.Filter = "Text Files(*.txt)|*.txt| All Files(*.*)|*.*";
-
-            if (save.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                StreamWriter saveStream = new StreamWriter(File.Create(save.FileName));
-                saveStream.Write(textarea.Text);
-                saveStream.Dispose();
-
-            }
-        }
         /// <summary>
         /// Open,read and display the text file selected by user on clicking load menu item
         /// </summary>
@@ -213,57 +189,69 @@ namespace Ase_Assignments
             String cmd = command.Text;
             ValidateCode val = new ValidateCode();
             String[] result = val.valid(cmd);
+            getShape(result);
+        }
+
+        //method to get shape
+        public void getShape(String[] result)
+        {
             try
             {
-                if (result[0] == "moveTo")
+                if (result[0] == "radius" && result[1] == "=")
                 {
-                    int fVal = Convert.ToInt32(result[1]);
-                    int sVal = Convert.ToInt32(result[2]);
-                    x = fVal;
-                    y = sVal;
-                    MessageBox.Show("points has been moved to \r\nx:" + x + "\r\ny:" + y + "");//shows message box
+                    radiusE(result);
+                }
+                else if (result[0] == "radius" && result[1] == "+")
+                {
+                    radiusP(result);
 
                 }
-                else if (result[0] == "drawTo")
+                else if (result[0] == "width" && result[1] == "=")
                 {
-                    int a = Convert.ToInt32(result[1]);
-                    int b = Convert.ToInt32(result[2]);
-                    Pen pen = new Pen(Color.Bisque, 3);
-                    graphics.DrawLine(pen, x, y, a, b);
+                    d = 0;
+                    width = Convert.ToInt32(result[2]);
                 }
-
-                else if (result[0] == "rectangle")
+                else if (result[0] == "height" && result[1] == "=")
                 {
-                    Factory s1 = new Factory();
-                    Shape sh = s1.getShape(result[0]);
-                    sh.drawShape(result, graphics, x, y);
+                    d = 0;
+                    height = Convert.ToInt32(result[2]);
                 }
-                else if (result[0] == "triangle")
+                else if (result[0] == "width" && result[1] == "+")
                 {
-                    Factory t1 = new Factory();
-                    Shape sh = t1.getShape(result[0]);
-                    sh.drawShape(result, graphics, x, y);
+                    width = Convert.ToInt32(result[2]);
                 }
-                else if (result[0] == "circle")
+                else if (result[0] == "height" && result[1] == "+")
                 {
-                    Factory c1 = new Factory();
-                    Shape sh = c1.getShape(result[0]);
-                    sh.drawShape(result, graphics, x, y);
+                    height = Convert.ToInt32(result[2]);
                 }
+                
             }
             catch (IndexOutOfRangeException j)//catches array ouut of range exceptions
             {
-                if (string.IsNullOrEmpty(command.Text))//checks if textbox is empty
-                {
-                    MessageBox.Show("No Command to Run");
-                }
-                else
-                {
-                    MessageBox.Show("Invalid Command");
-                }
+
+                MessageBox.Show("Invalid Command");
 
             }
-
         }
+        /// <summary>
+        /// Method to store radius
+        /// </summary>
+        /// <param name="result"></param>
+        private void radiusE(string[] result)
+        {
+            d = 0;
+            radius = Convert.ToInt32(result[2]);
+        }
+        /// <summary>
+        /// Method to add radius and store it
+        /// </summary>
+        /// <param name="result"></param>
+        private void radiusP(string[] result)
+        {
+            d = 0;
+            radius = radius + Convert.ToInt32(result[2]);
+        }
+
+
     }
 }

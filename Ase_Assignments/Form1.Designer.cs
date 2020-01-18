@@ -42,8 +42,6 @@
             this.textClear = new System.Windows.Forms.Button();
             this.Execute = new System.Windows.Forms.Button();
             this.refresh = new System.Windows.Forms.Button();
-            this.load = new System.Windows.Forms.Button();
-            this.save = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,21 +77,21 @@
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.laveToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -155,7 +153,7 @@
             // 
             // Execute
             // 
-            this.Execute.Location = new System.Drawing.Point(169, 371);
+            this.Execute.Location = new System.Drawing.Point(54, 371);
             this.Execute.Name = "Execute";
             this.Execute.Size = new System.Drawing.Size(82, 23);
             this.Execute.TabIndex = 0;
@@ -164,41 +162,19 @@
             // 
             // refresh
             // 
-            this.refresh.Location = new System.Drawing.Point(250, 371);
+            this.refresh.Location = new System.Drawing.Point(191, 371);
             this.refresh.Name = "refresh";
-            this.refresh.Size = new System.Drawing.Size(63, 23);
+            this.refresh.Size = new System.Drawing.Size(80, 23);
             this.refresh.TabIndex = 8;
             this.refresh.Text = "clear";
             this.refresh.UseVisualStyleBackColor = true;
             this.refresh.Click += new System.EventHandler(this.refresh_Click);
-            // 
-            // load
-            // 
-            this.load.Location = new System.Drawing.Point(34, 371);
-            this.load.Name = "load";
-            this.load.Size = new System.Drawing.Size(62, 23);
-            this.load.TabIndex = 9;
-            this.load.Text = "Load";
-            this.load.UseVisualStyleBackColor = true;
-            this.load.Click += new System.EventHandler(this.load_Click);
-            // 
-            // save
-            // 
-            this.save.Location = new System.Drawing.Point(96, 371);
-            this.save.Name = "save";
-            this.save.Size = new System.Drawing.Size(75, 23);
-            this.save.TabIndex = 10;
-            this.save.Text = "Save";
-            this.save.UseVisualStyleBackColor = true;
-            this.save.Click += new System.EventHandler(this.save_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.save);
-            this.Controls.Add(this.load);
             this.Controls.Add(this.refresh);
             this.Controls.Add(this.Execute);
             this.Controls.Add(this.textClear);
@@ -235,8 +211,6 @@
         private System.Windows.Forms.Button textClear;
         private System.Windows.Forms.Button Execute;
         private System.Windows.Forms.Button refresh;
-        private System.Windows.Forms.Button load;
-        private System.Windows.Forms.Button save;
     }
 
 }
