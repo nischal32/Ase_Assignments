@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 namespace Ase_Assignments
 {
+
     public class ValidateCode
     {
         public string[] valid(String text)
@@ -124,4 +125,9 @@ namespace Ase_Assignments
         }
 
     }
+
 }
+
+
+
+
