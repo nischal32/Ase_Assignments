@@ -54,6 +54,7 @@
             this.textarea.Name = "textarea";
             this.textarea.Size = new System.Drawing.Size(284, 287);
             this.textarea.TabIndex = 0;
+            this.textarea.TextChanged += new System.EventHandler(this.textarea_TextChanged);
             // 
             // menuStrip1
             // 
@@ -153,6 +154,7 @@
             this.Execute.Size = new System.Drawing.Size(82, 23);
             this.Execute.TabIndex = 0;
             this.Execute.Text = "Execute";
+            this.Execute.Click += new System.EventHandler(this.Execute_Click);
             // 
             // refresh
             // 

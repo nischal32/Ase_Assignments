@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -29,6 +30,70 @@ namespace Ase_Assignments
         {
             panel.BackColor = Color.LightBlue;
 
+        }
+
+        private void textarea_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Execute_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textarea.Text))
+            {
+                string textOrder = textarea.Text.Trim();
+
+                string[] arrayOrder = Regex.Split(textOrder, "\r\n");//splits the data at next line and stores themin array
+
+                for (int i = 0; i < arrayOrder.Length; i++)
+                {
+                    ValidateCode v = new ValidateCode();
+                    String[] result = v.valid(arrayOrder[i]);
+                    try
+                    {
+                        if (result[0] == "moveTo")
+                        {
+                            int a = Convert.ToInt32(result[1]);
+                            int b = Convert.ToInt32(result[2]);
+                            x = a;
+                            y = b;
+                        }
+                        else if (result[0] == "drawTo")
+                        {
+                            int a = Convert.ToInt32(result[1]);
+                            int b = Convert.ToInt32(result[2]);
+                            Pen pen = new Pen(Color.Bisque, 3);
+                            graphics.DrawLine(pen, x, y, a, b);
+                        }
+                        else if (result[0] == "rectangle")
+                        {
+                            Factory s1 = new Factory();
+                            Shape sh = s1.getShape(result[0]);
+                            sh.drawShape(result, graphics, x, y);
+                        }
+                        else if (result[0] == "triangle")
+                        {
+                            Factory t1 = new Factory();
+                            Shape sh = t1.getShape(result[0]);
+                            sh.drawShape(result, graphics, x, y);
+                        }
+                        else if (result[0] == "circle")
+                        {
+                            Factory c1 = new Factory();
+                            Shape sh = c1.getShape(result[0]);
+                            sh.drawShape(result, graphics, x, y);
+                        }
+                    }
+                    catch (IndexOutOfRangeException n)          //catches exception whendex is out of array
+                    {
+                        MessageBox.Show("Invalid Command");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No Command to Run");
+            }
         }
 
         private void run_Click(object sender, EventArgs e)
