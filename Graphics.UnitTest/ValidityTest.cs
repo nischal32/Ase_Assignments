@@ -88,6 +88,6 @@ namespace Graphics.UnitTest
             Assert.AreEqual(result[0], "1");
         }
 
-
     }
 }
+

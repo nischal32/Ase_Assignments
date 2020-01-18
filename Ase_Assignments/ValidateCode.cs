@@ -117,7 +117,7 @@ namespace Ase_Assignments
                 MessageBox.Show(e.Message);
 
             }
-            catch (IndexOutOfRangeException o)
+            catch (IndexOutOfRangeException o) 
             {
 
             }
