@@ -13,6 +13,7 @@ namespace Ase_Assignments
         int x = 0, y = 0, radius = 0, width = 0, height = 0, d = 0;
         Graphics graphics;
         int fVal = 0, sVal = 0;
+        string textOrder;
         int a = 0, b = 0, xTranslate = 0, yTranslate = 0;
         public Form1()
         {
@@ -189,6 +190,10 @@ namespace Ase_Assignments
                 {
                     transform(result);
                 }
+                else if (result[0] == "if")
+                {
+                    ifcase(result);
+                }
 
             }
             catch (IndexOutOfRangeException j)//catches array ouut of range exceptions
@@ -198,6 +203,165 @@ namespace Ase_Assignments
 
             }
         }
+
+
+        /// <summary>
+        /// if case method
+        /// </summary>
+        /// <param name="result"></param>
+        private void ifcase(string[] result)
+        {
+            d = 1;
+            int b = Ending();
+            if (b == 7)
+            {
+                string[] line;
+                line = textarea.Lines;
+                ValidateCode val = new ValidateCode();
+                var textArr = textOrder.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                int length = textArr.Length;
+                int counter = 0;
+                for (int s = 1; s < length - 1; s++)
+                {
+                    string[] arrayOrder = Regex.Split(line[counter], "\r\n");//splits the data at next line and stores themin array
+                    String[] results = val.valid(arrayOrder[0]);
+
+                    if (results[1] == "radius")
+                    {
+                        symbolcheck(results, line, counter);
+                    }
+                    counter = counter + 1;
+                }
+            }
+            else
+            {
+                d = 1;
+                MessageBox.Show("endif missing");
+            }
+
+        }
+
+
+        // method for loop case
+        private int Ending()
+        {
+            string[] line;
+            line = textarea.Lines;
+            ValidateCode val = new ValidateCode();
+            var textArr = textOrder.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            int length = textArr.Length;
+            int counter = 0;
+            for (int t = 1; t <= length; t++)
+            {
+                string[] arrayOrder = Regex.Split(line[counter], "\r\n");//splits the data at next line and stores themin array
+                string[] result1 = val.valid(arrayOrder[0]);
+                if (result1[0] == "end")
+                {
+                    return 5;
+                    break;
+                }
+                if (result1[0] == "endmethod")
+                {
+                    return 6;
+                    break;
+                }
+                if (result1[0] == "endif")
+                {
+                    return 7;
+                    break;
+                }
+
+                counter = counter + 1;
+            }
+
+            return 0;
+
+        }
+        /// <summary>
+        /// used to check symbols and check is condition is true or false for the if case method
+        /// </summary>
+        /// <param name="results"></param>
+        /// <param name="line"></param>
+        /// <param name="counter"></param>
+        private void symbolcheck(string[] results, string[] line, int counter)
+        {
+            ValidateCode val = new ValidateCode();
+            //condition to check if radius is equal
+            if (results[2] == "=")
+            {
+                if (results[1] == "radius")
+                {
+                    if (Convert.ToInt32(results[3]) == radius)
+                    {
+                        MessageBox.Show("Radius is equal");
+                        string[] arrayOrders = Regex.Split(line[counter + 1], "\r\n");//splits the data at next line and stores themin array
+                        String[] result = val.valid(arrayOrders[0]);
+                        if (result[0] == "circle")
+                        {
+                            string[] value = { "circle", result[1] };
+                            circle(value);
+                            MessageBox.Show("Circle is drawn");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Radius is not equal");
+                        d = 1;
+                    }
+                }
+            }
+            // condition to check if radius is greater or not
+            else if (results[2] == ">")
+            {
+                if (results[1] == "radius")
+                {
+                    if (radius > Convert.ToInt32(results[3]))
+                    {
+                        MessageBox.Show("Radius is greater");
+                        string[] arrayOrders = Regex.Split(line[counter + 1], "\r\n");//splits the data at next line and stores themin array
+                        String[] result = val.valid(arrayOrders[0]);
+                        if (result[0] == "circle")
+                        {
+                            string[] value = { "circle", result[1] };
+                            circle(value);
+                            MessageBox.Show("Circle is drawn");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("radius is lesser");
+                        d = 1;
+                    }
+                }
+
+            }
+            //condition to check if radius is lesser
+            else if (results[2] == "<")
+            {
+                if (results[1] == "radius")
+                {
+                    if (radius < Convert.ToInt32(results[3]))
+                    {
+                        MessageBox.Show("Radiius is lesser");
+                        string[] arrayOrders = Regex.Split(line[counter + 1], "\r\n");//splits the data at next line and stores themin array
+                        String[] r = val.valid(arrayOrders[0]);
+                        r = val.valid(arrayOrders[0]);
+                        if (r[0] == "circle")
+                        {
+                            string[] value = { "circle", r[1] };
+                            circle(value);
+                            MessageBox.Show("Circle is drawn");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("radius is greater");
+                        d = 1;
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Method to store radius
         /// </summary>
@@ -220,6 +384,19 @@ namespace Ase_Assignments
         /// Method for triangle
         /// </summary>
         /// <param name="result"></param>
+
+        /// <summary>
+        /// Method for circle
+        /// </summary>
+        /// <param name="result"></param>
+        private void circle(string[] result)
+        {
+            d = 0;
+
+            Factory s1 = new Factory();
+            Shape sh = s1.getShape(result[0]);
+            sh.drawShape(result, graphics, x, y, radius, width, height);
+        }
         private void triangle(string[] result)
         {
             d = 0;
